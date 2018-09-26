@@ -1,53 +1,63 @@
 <template>
   <div>
+    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+      <div class="container">
+        <div class="navbar-brand">
+          <nuxt-link class="navbar-item" to="/">
+            AIメーカーのAPIテスター
+          </nuxt-link>
+        </div>
+
+        <div id="nav-right">
+          <div v-if="$store.state.user">
+            <div :class="{ dropdown: true, 'is-right': true, 'is-active': userMenuOpened  }">
+              <div class="dropdown-trigger">
+                <a href="#" aria-haspopup="true" aria-controls="dropdown-menu" @click="userMenuOpened = !userMenuOpened">
+                  <img id="user-icon" :src="$store.state.user.photoURL" width="28" height="28">
+                </a>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                <div class="dropdown-content">
+                  <a href="#" class="dropdown-item" @click.prevent="logout">
+                    ログアウト
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </nav>
+
     <nuxt/>
   </div>
 </template>
 
-<style>
-html
-{
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
+<script>
+export default {
+  data() {
+    return {
+      userMenuOpened: false
+    };
+  },
+  methods: {
+    logout() {
+      this.$store.commit("setUser", null);
+      this.userMenuOpened = false;
+    }
+  }
+};
+</script>
+
+<style scoped>
+nav.navbar > div.container {
+  display: flex;
+  justify-content: space-between;
 }
-*, *:before, *:after
-{
-  box-sizing: border-box;
-  margin: 0;
-}
-.button--green
-{
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-.button--green:hover
-{
-  color: #fff;
-  background-color: #3b8070;
-}
-.button--grey
-{
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-.button--grey:hover
-{
-  color: #fff;
-  background-color: #35495e;
+
+#nav-right {
+  margin-top: 0.7rem;
+  margin-right: 0.7rem;
 }
 </style>
