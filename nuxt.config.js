@@ -1,7 +1,10 @@
-const pkg = require('./package')
+const pkg = require("./package");
+const envSet = require(`./env.${process.env.NODE_ENV}.js`);
 
 module.exports = {
-  mode: 'universal',
+  mode: "universal",
+
+  env: envSet,
 
   /*
   ** Headers of the page
@@ -9,30 +12,29 @@ module.exports = {
   head: {
     title: pkg.name,
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { hid: "description", name: "description", content: pkg.description }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
 
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#FFFFFF' },
+  loading: { color: "#FFFFFF" },
 
   /*
   ** Global CSS
   */
-  css: [
-  ],
+  css: [],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: "~/plugins/local-storage.js", ssr: false },
+    "~/plugins/firebase.js"
   ],
 
   /*
@@ -40,9 +42,9 @@ module.exports = {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
-    '@nuxtjs/axios',
+    "@nuxtjs/axios",
     // Doc:https://github.com/nuxt-community/modules/tree/master/packages/bulma
-    '@nuxtjs/bulma'
+    "@nuxtjs/bulma"
   ],
   /*
   ** Axios module configuration
@@ -65,8 +67,6 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
-    extend(config, ctx) {
-      
-    }
+    extend(config, ctx) {}
   }
-}
+};
