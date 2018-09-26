@@ -1,0 +1,16 @@
+{
+  "files": [
+    "assets",
+    "components",
+    "data",
+    "layouts",
+    "middleware",
+    "pages",
+    "plugins",
+    "static",
+    "store",
+    "env.production.js",
+    "nuxt.config.js",
+    "yarn.lock"
+  ]
+}
