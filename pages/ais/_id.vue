@@ -97,33 +97,6 @@ export default {
           this.loading = false;
         });
     },
-
-    getImage() {
-      return new Promise(async resolve => {
-        const icon = await this.loadImage();
-        const canvas = document.createElement("canvas");
-        canvas.width = icon.width;
-        canvas.height = icon.height;
-        const context = canvas.getContext("2d");
-        context.drawImage(icon, 0, 0);
-        canvas.toBlob(blob => resolve(blob));
-      });
-    },
-
-    loadImage() {
-      return new Promise(resolve => {
-        const img = document.createElement("img");
-        img.crossOrigin = "anonymous";
-        img.onload = () => {
-          resolve(img);
-        };
-        img.src = this.$store.state.user.photoURL.replace(
-          "normal.",
-          "400x400."
-        );
-      });
-    },
-
     buttonClass() {
       return {
         button: true,
