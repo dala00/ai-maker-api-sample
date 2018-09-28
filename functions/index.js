@@ -1,5 +1,3 @@
-const fs = require("fs");
-const https = require("https");
 const request = require("request");
 const cors = require("cors")({ origin: true });
 const functions = require("firebase-functions");
