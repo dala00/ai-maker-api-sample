@@ -80,7 +80,7 @@ export default {
       };
       axios
         .post(
-          "https://us-central1-free-161406.cloudfunctions.net/imageClassification",
+          process.env.CLOUD_FUNCTIONS_BASE_URL + "imageClassification",
           params
         )
         .then(response => {
