@@ -1,6 +1,6 @@
 const request = require("request");
-const cors = require("cors")({ origin: true });
 const functions = require("firebase-functions");
+const cors = require("cors")(functions.config().cors);
 const FormData = require("form-data");
 
 // // Create and Deploy Your First Cloud Functions
