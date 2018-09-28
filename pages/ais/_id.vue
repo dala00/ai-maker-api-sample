@@ -74,18 +74,15 @@ export default {
       }
 
       this.loading = true;
-      const params = new FormData();
-      params.append("id", this.ai.id);
-      params.append("apikey", process.env.AI_MAKER_APIKEY);
-      const fileName = this.getFileName(this.$store.state.user.photoURL);
-      params.append("file", await this.getImage(), fileName);
-      const config = {
-        headers: {
-          "content-type": "multipart/form-data"
-        }
+      const params = {
+        id: this.ai.id,
+        image: this.$store.state.user.photoURL
       };
       axios
-        .post("https://aimaker.io/image/classification/api", params, config)
+        .post(
+          "https://us-central1-free-161406.cloudfunctions.net/imageClassification",
+          params
+        )
         .then(response => {
           this.labels = response.data.labels.sort((a, b) => {
             if (a.score == b.score) {
@@ -99,11 +96,6 @@ export default {
           console.log(error);
           this.loading = false;
         });
-    },
-
-    getFileName(url) {
-      const match = url.match(/[^\/\.]+\.[^\.]+$/);
-      return match[0];
     },
 
     getImage() {

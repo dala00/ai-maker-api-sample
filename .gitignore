@@ -14,5 +14,7 @@ dist
 .idea
 .vscode
 
+.firebaserc
 env.development.js
 env.production.js
+firebase.json
